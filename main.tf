@@ -1,24 +1,24 @@
 resource "azurerm_resource_group" "rg" {
-  name = "${var.azurerm_resource_group}tfbasic"
+  name     = "${var.azurerm_resource_group}tfbasic"
   location = var.azurerm_location
 }
 
 
 resource "azurerm_storage_account" "sa" {
-  name = var.azurerm_storage_account_name
-  location = var.azurerm_location
-  access_tier = var.azurerm_storage_account_access_tier
-  account_tier = var.azurerm_storage_account_tier
+  name                     = var.azurerm_storage_account_name
+  location                 = var.azurerm_location
+  access_tier              = var.azurerm_storage_account_access_tier
+  account_tier             = var.azurerm_storage_account_tier
   account_replication_type = var.azurerm_storage_account_replication_type
-  min_tls_version = var.azurerm_storage_account_min_tls_version
-  resource_group_name = "${var.azurerm_resource_group}tfbasic"
-depends_on = [
-  azurerm_resource_group.rg
-]
+  min_tls_version          = var.azurerm_storage_account_min_tls_version
+  resource_group_name      = "${var.azurerm_resource_group}tfbasic"
+  depends_on = [
+    azurerm_resource_group.rg
+  ]
 }
 
 resource "azurerm_storage_container" "sac" {
-  name = "${var.azurerm_storage_account_container_prefix}${var.azurerm_storage_account_container_name}"
+  name                  = "${var.azurerm_storage_account_container_prefix}${var.azurerm_storage_account_container_name}"
   container_access_type = "container"
-  storage_account_name = var.azurerm_storage_account_name
+  storage_account_name  = var.azurerm_storage_account_name
 }
